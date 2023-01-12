@@ -11,9 +11,11 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text(
-          'Hello there',
+      body: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Center(
+          child: Text('Home Page'),
         ),
       ),
     );
