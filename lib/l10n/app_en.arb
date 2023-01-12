@@ -1,7 +1,8 @@
 {
-    "@_GLOBAL": {},
     "appName": "Squad",
     "@appName": {
       "description": "Platform name for application"
-    }
+    },
+    "channels": "Channels",
+    "personalMessages": "Personal Messages"
 }

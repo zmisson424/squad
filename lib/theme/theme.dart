@@ -4,7 +4,7 @@ ThemeData squadTheme({
   bool isDarkMode = false,
 }) {
   return ThemeData(
-    useMaterial3: true,
-    applyElevationOverlayColor: true,
-  );
+      useMaterial3: true,
+      applyElevationOverlayColor: true,
+      scaffoldBackgroundColor: Colors.blueGrey.shade100);
 }
