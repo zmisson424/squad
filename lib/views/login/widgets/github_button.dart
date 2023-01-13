@@ -25,12 +25,12 @@ class GithubLoginButton extends StatelessWidget {
         child: Row(
           children: [
             Image.asset(
-              Images.appleLogo,
+              Images.githubLogo,
               width: 24,
             ),
             Padding(
               padding: const EdgeInsets.only(
-                left: 24,
+                left: 26,
               ),
               child: Text(
                 AppLocalizations.of(context)!.githubSignIn,

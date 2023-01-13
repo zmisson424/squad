@@ -25,12 +25,12 @@ class FacebookLoginButton extends StatelessWidget {
         child: Row(
           children: [
             Image.asset(
-              Images.appleLogo,
-              width: 24,
+              Images.facebookLogo,
+              height: 20,
             ),
             Padding(
               padding: const EdgeInsets.only(
-                left: 24,
+                left: 32,
               ),
               child: Text(
                 AppLocalizations.of(context)!.facebookSignIn,
