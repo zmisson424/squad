@@ -11,7 +11,10 @@ class ChatDisplay extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       child: Stack(
-        children: const [ChatOverview(), DesktopEditor()],
+        children: const [
+          ChatOverview(),
+          DesktopEditor(),
+        ],
       ),
     );
   }

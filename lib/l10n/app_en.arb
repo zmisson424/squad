@@ -5,5 +5,6 @@
     },
     "channels": "Channels",
     "personalMessages": "Personal Messages",
-    "emptyChat": "Send a message to get this conversation started."
+    "emptyChat": "Send a message to get this conversation started.",
+    "emptyMessageHint": "Type a message"
 }
