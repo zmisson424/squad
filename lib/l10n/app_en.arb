@@ -1,7 +1,12 @@
 {
-    "@_GLOBAL": {},
     "appName": "Squad",
     "@appName": {
       "description": "Platform name for application"
-    }
+    },
+    "channels": "Channels",
+    "personalMessages": "Direct Messages",
+    "emptyChat": "Send a message to get this conversation started.",
+    "emptyMessageHint": "Type a message",
+    "settings": "Settings",
+    "profile": "Profile"
 }
