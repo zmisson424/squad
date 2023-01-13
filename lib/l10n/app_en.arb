@@ -4,5 +4,6 @@
       "description": "Platform name for application"
     },
     "channels": "Channels",
-    "personalMessages": "Personal Messages"
+    "personalMessages": "Personal Messages",
+    "emptyChat": "Send a message to get this conversation started."
 }

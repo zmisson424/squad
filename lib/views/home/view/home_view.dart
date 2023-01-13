@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:squad/constants/constraints.dart';
 import 'package:squad/views/app_bars/views/desktop_app_bar.dart';
+import 'package:squad/views/chat/chat.dart';
 import 'package:squad/views/drawers/views/desktop_drawer.dart';
 
 class HomeView extends StatefulWidget {
@@ -42,7 +43,9 @@ class _HomeViewState extends State<HomeView> {
                     mainAxisSize: MainAxisSize.max,
                     children: const [
                       DesktopAppBar(),
-                      Spacer(),
+                      Expanded(
+                        child: ChatDisplay(),
+                      ),
                     ],
                   ),
                 ),
