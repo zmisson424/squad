@@ -11,7 +11,11 @@ class DesktopEditor extends StatelessWidget {
       left: 0,
       right: 0,
       child: Padding(
-        padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+        padding: EdgeInsets.only(
+          left: 16,
+          right: 16,
+          bottom: 16,
+        ),
         child: FullEditor(),
       ),
     );

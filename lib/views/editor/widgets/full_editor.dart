@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:squad/theme/colors.dart';
 import 'package:squad/views/editor/widgets/editor_text_input.dart';
 import 'package:squad/views/editor/widgets/full_tools_row.dart';
 
@@ -24,12 +25,29 @@ class _FullEditorState extends State<FullEditor> {
         child: Column(
           children: [
             const FullToolBar(),
-            Row(
-              children: const [
-                Expanded(
-                  child: EditorTextInput(),
-                )
-              ],
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 6,
+              ),
+              child: Row(
+                children: [
+                  const Expanded(
+                    child: EditorTextInput(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                    ),
+                    child: IconButton(
+                      onPressed: () => print("TODO"),
+                      icon: const Icon(
+                        Icons.send,
+                      ),
+                      color: drawerColor,
+                    ),
+                  )
+                ],
+              ),
             )
           ],
         ),
