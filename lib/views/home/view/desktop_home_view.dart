@@ -9,29 +9,30 @@ class DesktopHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SizedBox(
-      width: double.infinity,
-      height: double.infinity,
-      child: Row(
-        children: [
-          const DesktopDrawer(),
-          Expanded(
-            child: SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: const [
-                  DesktopAppBar(),
-                  Expanded(
-                    child: ChatDisplay(),
-                  ),
-                ],
+      body: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Row(
+          children: [
+            const DesktopDrawer(),
+            Expanded(
+              child: SizedBox(
+                width: double.infinity,
+                height: double.infinity,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: const [
+                    DesktopAppBar(),
+                    Expanded(
+                      child: ChatDisplay(),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
