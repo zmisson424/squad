@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:squad/views/login/widgets/apple_button.dart';
 import 'package:squad/views/login/widgets/email_button.dart';
+import 'package:squad/views/login/widgets/email_sign_in.dart';
 import 'package:squad/views/login/widgets/facebook_button.dart';
 import 'package:squad/views/login/widgets/github_button.dart';
 import 'package:squad/views/login/widgets/google_button.dart';
@@ -64,11 +65,18 @@ class _LoginViewState extends State<LoginView> {
               ),
             ),
             EmailLoginButton(
-              onPressed: () => print("TODO"),
+              onPressed: _onEmailButtonClicked,
             ),
           ],
         ),
       ),
+    );
+  }
+
+  void _onEmailButtonClicked() {
+    showDialog(
+      context: context,
+      builder: (context) => const EmailSignInDialog(),
     );
   }
 }

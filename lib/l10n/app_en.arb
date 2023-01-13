@@ -16,5 +16,7 @@
     "githubSignIn": "Sign in with Github",
     "emailSignIn": "Sign in with Email",
     "createAccount": "Create a new account",
-    "forgotPassword": "Forgot Password"
+    "forgotPassword": "Forgot Password",
+    "email": "Email",
+    "password": "Password"
 }
