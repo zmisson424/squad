@@ -4,7 +4,9 @@
       "description": "Platform name for application"
     },
     "channels": "Channels",
-    "personalMessages": "Personal Messages",
+    "personalMessages": "Direct Messages",
     "emptyChat": "Send a message to get this conversation started.",
-    "emptyMessageHint": "Type a message"
+    "emptyMessageHint": "Type a message",
+    "settings": "Settings",
+    "profile": "Profile"
 }
