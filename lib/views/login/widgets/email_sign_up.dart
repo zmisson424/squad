@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:squad/views/login/widgets/email_sign_up.dart';
 
-class EmailSignIn extends StatelessWidget {
-  const EmailSignIn({
+class EmailSignUp extends StatelessWidget {
+  const EmailSignUp({
     Key? key,
-    required this.onCreate,
-    required this.onForgot,
+    required this.onBack,
   }) : super(key: key);
 
-  final Function() onCreate;
-
-  final Function() onForgot;
+  final Function() onBack;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +16,28 @@ class EmailSignIn extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            AppLocalizations.of(context)!.emailSignIn,
-            style: const TextStyle(
-              fontSize: 20,
-            ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                onPressed: onBack,
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 16,
+                  right: 48,
+                ),
+                child: Text(
+                  AppLocalizations.of(context)!.createAccount,
+                  style: const TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              )
+            ],
           ),
           Padding(
             padding: const EdgeInsets.only(
@@ -83,24 +96,6 @@ class EmailSignIn extends StatelessWidget {
                   AppLocalizations.of(context)!.signIn,
                 ),
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 24,
-              bottom: 18,
-            ),
-            child: TextButton(
-              onPressed: onCreate,
-              child: Text(
-                AppLocalizations.of(context)!.createAccount,
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: onForgot,
-            child: Text(
-              AppLocalizations.of(context)!.forgotPassword,
             ),
           ),
         ],
