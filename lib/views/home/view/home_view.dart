@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:squad/constants/constraints.dart';
-import 'package:squad/pages/drawers/views/desktop_drawer.dart';
+import 'package:squad/views/drawers/views/desktop_drawer.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
