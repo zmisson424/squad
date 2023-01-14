@@ -51,8 +51,30 @@ class EmailSignUp extends StatelessWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
+                  labelText: AppLocalizations.of(context)!.name,
+                  prefixIcon: const Icon(
+                    Icons.person,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 12,
+            ),
+            child: SizedBox(
+              width: 300,
+              height: 48,
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   labelText: AppLocalizations.of(context)!.email,
-                  prefixIcon: const Icon(Icons.email_outlined),
+                  prefixIcon: const Icon(
+                    Icons.email_outlined,
+                  ),
                 ),
               ),
             ),
@@ -71,7 +93,9 @@ class EmailSignUp extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   labelText: AppLocalizations.of(context)!.password,
-                  prefixIcon: const Icon(Icons.password_outlined),
+                  prefixIcon: const Icon(
+                    Icons.password_outlined,
+                  ),
                 ),
               ),
             ),
@@ -93,7 +117,7 @@ class EmailSignUp extends StatelessWidget {
                   Navigator.of(context).pop();
                 },
                 child: Text(
-                  AppLocalizations.of(context)!.signIn,
+                  AppLocalizations.of(context)!.create,
                 ),
               ),
             ),
