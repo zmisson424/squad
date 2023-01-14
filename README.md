@@ -11,3 +11,15 @@ An open source version of Slack and Teams.
 ## Getting Started
 
 ## Architecture
+
+## Firebase
+
+## Bloc
+
+## Authorization
+
+- Google
+- Apple
+- Facebook
+- Github
+- Email
