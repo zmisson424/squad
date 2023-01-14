@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:squad/views/login/widgets/email_forgot.dart';
 import 'package:squad/views/login/widgets/email_sign_in.dart';
 import 'package:squad/views/login/widgets/email_sign_up.dart';
 
@@ -43,7 +44,13 @@ class _EmailDialogState extends State<EmailDialog> {
           },
         );
       case EmailState.forgotPassword:
-        return Container();
+        return EmailForgot(
+          onBack: () {
+            setState(() {
+              emailState = EmailState.signIn;
+            });
+          },
+        );
     }
   }
 }
