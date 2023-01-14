@@ -8,5 +8,18 @@
     "emptyChat": "Send a message to get this conversation started.",
     "emptyMessageHint": "Type a message",
     "settings": "Settings",
-    "profile": "Profile"
+    "profile": "Profile",
+    "signIn": "Sign In",
+    "googleSignIn": "Sign in with Google",
+    "facebookSignIn": "Sign in with Facebook",
+    "appleSignIn": "Sign in with Apple",
+    "githubSignIn": "Sign in with Github",
+    "emailSignIn": "Sign in with Email",
+    "createAccount": "Create a new account",
+    "forgotPassword": "Forgot Password",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "create": "Create",
+    "sendResetEmail": "Send Password Reset Email"
 }

@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:squad/views/home/home.dart';
 import 'package:squad/theme/theme.dart';
+import 'package:squad/views/login/view/login_view.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -36,7 +37,8 @@ class _AppViewState extends State<AppView> {
       supportedLocales: const [
         Locale('en', ''), // English, no country code
       ],
-      home: const HomeView(),
+      // home: const HomeView(),
+      home: const LoginView(),
     );
   }
 }
