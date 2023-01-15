@@ -1,7 +1,6 @@
 import 'dart:async';
 
-// ignore: depend_on_referenced_packages
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:squad/api/repositories/auth_repository.dart';
 import 'package:squad/models/user.dart';
