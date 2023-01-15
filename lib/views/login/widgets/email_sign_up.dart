@@ -1,13 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:squad/views/login/bloc/login_bloc.dart';
 
-class EmailSignUp extends StatelessWidget {
+class EmailSignUp extends StatefulWidget {
   const EmailSignUp({
     Key? key,
     required this.onBack,
   }) : super(key: key);
 
   final Function() onBack;
+
+  @override
+  State<EmailSignUp> createState() => _EmailSignUpState();
+}
+
+class _EmailSignUpState extends State<EmailSignUp> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+
+  String? _emailError;
+  String? _passwordError;
+  String? _nameError;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _nameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +43,7 @@ class EmailSignUp extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                onPressed: onBack,
+                onPressed: widget.onBack,
                 icon: const Icon(
                   Icons.arrow_back_ios,
                 ),
@@ -47,15 +70,25 @@ class EmailSignUp extends StatelessWidget {
               width: 300,
               height: 48,
               child: TextField(
+                controller: _nameController,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.next,
+                onChanged: (_) {
+                  if (_nameError != null) {
+                    setState(() {
+                      _nameError = null;
+                    });
+                  }
+                },
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  labelText: AppLocalizations.of(context)!.name,
-                  prefixIcon: const Icon(
-                    Icons.person,
-                  ),
-                ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    labelText: AppLocalizations.of(context)!.name,
+                    prefixIcon: const Icon(
+                      Icons.person,
+                    ),
+                    errorText: _nameError),
               ),
             ),
           ),
@@ -67,6 +100,16 @@ class EmailSignUp extends StatelessWidget {
               width: 300,
               height: 48,
               child: TextField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                onChanged: (_) {
+                  if (_emailError != null) {
+                    setState(() {
+                      _emailError = null;
+                    });
+                  }
+                },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -75,6 +118,7 @@ class EmailSignUp extends StatelessWidget {
                   prefixIcon: const Icon(
                     Icons.email_outlined,
                   ),
+                  errorText: _emailError,
                 ),
               ),
             ),
@@ -88,6 +132,16 @@ class EmailSignUp extends StatelessWidget {
               height: 48,
               child: TextField(
                 obscureText: true,
+                controller: _passwordController,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.done,
+                onChanged: (_) {
+                  if (_passwordError != null) {
+                    setState(() {
+                      _passwordError = null;
+                    });
+                  }
+                },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -96,6 +150,7 @@ class EmailSignUp extends StatelessWidget {
                   prefixIcon: const Icon(
                     Icons.password_outlined,
                   ),
+                  errorText: _passwordError,
                 ),
               ),
             ),
@@ -112,10 +167,7 @@ class EmailSignUp extends StatelessWidget {
                   backgroundColor: Colors.deepOrange.shade500,
                   foregroundColor: Colors.white,
                 ),
-                onPressed: () {
-                  // TODO
-                  Navigator.of(context).pop();
-                },
+                onPressed: () => _handleCreateAccount(context),
                 child: Text(
                   AppLocalizations.of(context)!.create,
                 ),
@@ -125,5 +177,20 @@ class EmailSignUp extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _handleCreateAccount(BuildContext context) {
+    bool validEmail = true;
+    bool validName = true;
+    bool validPassword = true;
+
+    if (validEmail && validName && validPassword) {
+      context.read<LoginBloc>().add(
+            CreateAccountWithEmail(
+                email: _emailController.text,
+                password: _passwordController.text,
+                name: _nameController.text),
+          );
+    }
   }
 }

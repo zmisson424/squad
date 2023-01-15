@@ -11,6 +11,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         super(const LoginState()) {
     on<LoginFailure>(_loginFailure);
     on<EmailLoginAttempt>(_emailLoginAttempt);
+    on<CreateAccountWithEmail>(_createAccountWithEmail);
+    on<ForgotPassword>(_sendPasswordResetEmail);
   }
 
   final AuthRepository _authRepository;
@@ -19,8 +21,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginFailure event,
     Emitter<LoginState> emit,
   ) async {
-    print("Login Failure");
-    print(event.errorMessage);
     emit(state.copyWith(
       status: LoginStatus.error,
       errorMessage: event.errorMessage,
@@ -38,6 +38,34 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         password: event.password,
       );
     } on LogInWithEmailAndPasswordFailure catch (e) {
+      add(LoginFailure(errorMessage: e.message));
+    }
+  }
+
+  void _createAccountWithEmail(
+    CreateAccountWithEmail event,
+    Emitter<LoginState> emit,
+  ) async {
+    try {
+      emit(state.copyWith(status: LoginStatus.inProgress));
+      print("Create Account");
+      // await _authRepository.createAccountWithEmail(
+      //   email: event.email,
+      //   password: event.password,
+      //   name: event.name,
+      // );
+    } on SignUpWithEmailAndPasswordFailure catch (e) {
+      add(LoginFailure(errorMessage: e.message));
+    }
+  }
+
+  void _sendPasswordResetEmail(
+    ForgotPassword event,
+    Emitter<LoginState> emit,
+  ) async {
+    try {
+      await _authRepository.requestPasswordReset(email: event.email);
+    } on ResetPasswordResetFailure catch (e) {
       add(LoginFailure(errorMessage: e.message));
     }
   }

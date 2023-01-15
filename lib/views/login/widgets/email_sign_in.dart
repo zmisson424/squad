@@ -58,6 +58,8 @@ class _EmailSignInState extends State<EmailSignIn> {
               width: 300,
               height: 48,
               child: TextField(
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -77,6 +79,7 @@ class _EmailSignInState extends State<EmailSignIn> {
               height: 48,
               child: TextField(
                 obscureText: true,
+                textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
