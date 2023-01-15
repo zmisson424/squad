@@ -2,6 +2,10 @@
 
 An open source version of Slack and Teams.
 
+# Issues of Note
+
+- Firebase does not support Windows and Linux
+
 ## Introducion
 
 ## Requirements
