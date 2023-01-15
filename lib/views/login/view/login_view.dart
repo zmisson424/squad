@@ -10,6 +10,10 @@ import 'package:squad/views/login/widgets/google_button.dart';
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
 
+  static Route<void> route() {
+    return MaterialPageRoute<void>(builder: (_) => const LoginView());
+  }
+
   @override
   State<LoginView> createState() => _LoginViewState();
 }

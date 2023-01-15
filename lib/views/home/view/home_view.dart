@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:squad/constants/constraints.dart';
-import 'package:squad/views/app_bars/views/desktop_app_bar.dart';
-import 'package:squad/views/chat/chat.dart';
-import 'package:squad/views/drawers/views/desktop_drawer.dart';
 import 'package:squad/views/home/view/desktop_home_view.dart';
 import 'package:squad/views/home/view/mobile_home_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
+
+  static Route<void> route() {
+    return MaterialPageRoute<void>(builder: (_) => const HomeView());
+  }
 
   @override
   State<HomeView> createState() => _HomeViewState();

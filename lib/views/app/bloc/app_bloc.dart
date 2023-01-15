@@ -1,5 +1,6 @@
 import 'dart:async';
 
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:squad/api/repositories/auth_repository.dart';
@@ -29,11 +30,13 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   late final StreamSubscription<User> _authSubscription;
 
   void _onUserChanged(AppUserChanged event, Emitter<AppState> emit) {
-    // TODO
+    emit(event.user.isEmpty
+        ? const AppState.unauthenticated()
+        : AppState.authenticated(event.user));
   }
 
   void _onLogoutRequested(AppLogoutRequested event, Emitter<AppState> emit) {
-    // TODO
+    unawaited(_authRepository.logout());
   }
 
   @override
