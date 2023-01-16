@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:squad/models/user.dart' as squad_user;
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AuthRepository {
   // Firebase Authentication
@@ -114,6 +115,38 @@ class AuthRepository {
       throw LogInWithGoogleFailure.fromCode(e.code);
     } catch (_) {
       throw const LogInWithGoogleFailure();
+    }
+  }
+
+  // Handle Apple Login Authentication
+  Future<void> loginWithApple() async {
+    try {
+      AuthorizationCredentialAppleID appleCredential =
+          await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+
+      OAuthCredential oauthCredential = OAuthProvider("apple.com")
+          .credential(idToken: appleCredential.identityToken, rawNonce: '');
+
+      UserCredential userResult =
+          await _firebaseAuth.signInWithCredential(oauthCredential);
+
+      User user = userResult.user!;
+
+      String displayName =
+          '${appleCredential.givenName} ${appleCredential.familyName}';
+      String email = '${appleCredential.email}';
+
+      await user.updateDisplayName(displayName);
+      await user.updateEmail(email);
+    } on FirebaseAuthException catch (e) {
+      throw LogInWithAppleFailure.fromCode(e.code);
+    } catch (_) {
+      throw const LogInWithAppleFailure();
     }
   }
 }
@@ -246,6 +279,49 @@ class LogInWithGoogleFailure implements Exception {
         );
       default:
         return const LogInWithGoogleFailure();
+    }
+  }
+
+  final String message;
+}
+
+/// Apple Failures
+/// TODO: L10N
+class LogInWithAppleFailure implements Exception {
+  const LogInWithAppleFailure({this.message = 'An unknown error has occured.'});
+
+  factory LogInWithAppleFailure.fromCode(String code) {
+    switch (code) {
+      case 'account-exists-with-different-credential':
+        return const LogInWithAppleFailure(
+            message: 'Account exists with different credentials.');
+      case 'invalid-credential':
+        return const LogInWithAppleFailure(
+            message: 'The credential received is invalid or expired');
+      case 'operation-not-allowed':
+        return const LogInWithAppleFailure(
+          message: 'Operation is not allowed.  Please contact support.',
+        );
+      case 'user-disabled':
+        return const LogInWithAppleFailure(
+          message:
+              'This user has been disabled. Please contact support for help.',
+        );
+      case 'user-not-found':
+      case 'wrong-password':
+        return const LogInWithAppleFailure(
+          message: 'Incorrect password, please try again.',
+        );
+      case 'invalid-verification-code':
+        return const LogInWithAppleFailure(
+          message: 'The credential verification code received is invalid.',
+        );
+      case 'invalid-verification-id':
+        return const LogInWithAppleFailure(
+          message: 'The credential verification ID received is invalid.',
+        );
+      default:
+        return const LogInWithAppleFailure();
     }
   }
 

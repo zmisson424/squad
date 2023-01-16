@@ -11,7 +11,7 @@ class CustomOptions {
   static bool allowGoogleSignIn = true;
 
   // Apple Login Enabled
-  static bool allowAppleSignIn = true;
+  static bool allowAppleSignIn = false;
 
   // Facebook Login Enabled
   static bool allowFacebookSignIn = false;

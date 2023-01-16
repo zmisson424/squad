@@ -31,13 +31,17 @@ following methods are provided by this project.
 
 - Email and Password
 - Google
-- Apple
+- Apple **Disabled by default**
 - Facebook **Disabled by default**
 - Github **Disabled by default**
 - Twitter **Disabled by default**
 - Microsoft **Disabled by default**
 
 All authroization methods can be enabled or disabled from the [Customization Dart File](#Customization-Dart-File).
+
+**Note** If using any login service other than Email and Password then "Sign in with Apple" must
+be enabled on Apple devices (Mac and iPhone) if submitting or going through the App Store.
+[Apple Sign In Documentation](https://developer.apple.com/sign-in-with-apple/get-started)
 
 #### Email and Password
 
@@ -60,6 +64,13 @@ sure to enable Google in the Firebase Auth panel.
 
 To enable on Web make sure to provide your GOOGLE_SIGN_IN_OAUTH_CLIENT_ID in the <meta> tag in
 web/index.html
+
+#### Apple Login
+
+Apple Authentication will utilize this [sign_in_with_apple](https://pub.dev/packages/sign_in_with_apple)
+plugin. This feature will require a paid Apple Developer account. Follow all of the instructions
+provided with the plugin to configure this app to work with your Apple account. **Note** Make
+sure to enable Google in the Firebase Auth panel.
 
 #### Multi Factor Authentication
 
