@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:squad/utils/validators.dart';
 import 'package:squad/views/login/bloc/login_bloc.dart';
 
 class EmailSignUp extends StatefulWidget {
@@ -68,7 +69,6 @@ class _EmailSignUpState extends State<EmailSignUp> {
             ),
             child: SizedBox(
               width: 300,
-              height: 48,
               child: TextField(
                 controller: _nameController,
                 keyboardType: TextInputType.text,
@@ -98,7 +98,6 @@ class _EmailSignUpState extends State<EmailSignUp> {
             ),
             child: SizedBox(
               width: 300,
-              height: 48,
               child: TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -129,7 +128,6 @@ class _EmailSignUpState extends State<EmailSignUp> {
             ),
             child: SizedBox(
               width: 300,
-              height: 48,
               child: TextField(
                 obscureText: true,
                 controller: _passwordController,
@@ -183,6 +181,51 @@ class _EmailSignUpState extends State<EmailSignUp> {
     bool validEmail = true;
     bool validName = true;
     bool validPassword = true;
+
+    // Check Name
+    if (_nameController.text.isEmpty) {
+      validName = false;
+      // TODO: L10N
+      setState(() {
+        _nameError = 'Must enter a valid name.';
+      });
+    }
+
+    if (!isValidEmailAddress(_emailController.text)) {
+      validEmail = false;
+      // TODO: L10N
+      setState(() {
+        _emailError = 'Must eneter a valid email address.';
+      });
+    }
+
+    if (!isPasswordValidLenth(_passwordController.text)) {
+      validPassword = false;
+      // TODO: Fix reqs
+      setState(() {
+        _passwordError = 'Password must be at least X characters long.';
+      });
+    }
+
+    if (!isPasswordValidUppercaseCharacter(_passwordController.text) &&
+        validPassword) {
+      validPassword = false;
+      // TODO: Fix reqs
+      setState(() {
+        _passwordError =
+            'Password must contain at least one uppercase character.';
+      });
+    }
+
+    if (!isPasswordValidSpecialCharacter(_passwordController.text) &&
+        validPassword) {
+      validPassword = false;
+      // TODO: Fix reqs
+      setState(() {
+        _passwordError =
+            'Password must contain at least one special character.';
+      });
+    }
 
     if (validEmail && validName && validPassword) {
       context.read<LoginBloc>().add(
