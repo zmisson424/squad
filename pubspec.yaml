@@ -31,6 +31,8 @@ dependencies:
 
   sign_in_with_apple: ^4.3.0 # handles Apple Authentication
 
+  flutter_facebook_auth: ^5.0.7 # handles Facebook Authentication
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

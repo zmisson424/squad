@@ -67,12 +67,16 @@ web/index.html
 
 #### Apple Login
 
-Apple Authentication will utilize this [sign_in_with_apple](https://pub.dev/packages/sign_in_with_apple)
+Apple Authentication will utilize [sign_in_with_apple](https://pub.dev/packages/sign_in_with_apple)
 plugin. This feature will require a paid Apple Developer account. Follow all of the instructions
 provided with the plugin to configure this app to work with your Apple account. **Note** Make
 sure to enable Google in the Firebase Auth panel.
 
 #### Facebook Login
+
+Facebook Authentication will utilize [flutter_facebook_auth](https://pub.dev/packages/flutter_facebook_auth)
+plugin. Follow all of the instructions to receive Facebook Developer keys. **Note** Make
+sure to enable Google in the Firebase Auth panel.
 
 #### Twitter Login
 
