@@ -1,8 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:squad/models/user.dart' as squad_user;
 
 class AuthRepository {
+  // Firebase Authentication
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  // Google Auth Library
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   AuthRepository();
 
@@ -95,6 +100,22 @@ class AuthRepository {
       throw const ResetPasswordResetFailure();
     }
   }
+
+  // Handles Google Login Authentication
+  Future<void> loginWithGoogle() async {
+    try {
+      GoogleSignInAccount? googleAccount = await _googleSignIn.signIn();
+      GoogleSignInAuthentication googleAuth =
+          await googleAccount!.authentication;
+      OAuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+      await _firebaseAuth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw LogInWithGoogleFailure.fromCode(e.code);
+    } catch (_) {
+      throw const LogInWithGoogleFailure();
+    }
+  }
 }
 
 /// Error list for Sign Up with Email and Password
@@ -181,6 +202,50 @@ class ResetPasswordResetFailure implements Exception {
         );
       default:
         return const ResetPasswordResetFailure();
+    }
+  }
+
+  final String message;
+}
+
+/// Google Failures
+/// TODO: L10N
+class LogInWithGoogleFailure implements Exception {
+  const LogInWithGoogleFailure(
+      {this.message = 'An unknown error has occured.'});
+
+  factory LogInWithGoogleFailure.fromCode(String code) {
+    switch (code) {
+      case 'account-exists-with-different-credential':
+        return const LogInWithGoogleFailure(
+            message: 'Account exists with different credentials.');
+      case 'invalid-credential':
+        return const LogInWithGoogleFailure(
+            message: 'The credential received is invalid or expired');
+      case 'operation-not-allowed':
+        return const LogInWithGoogleFailure(
+          message: 'Operation is not allowed.  Please contact support.',
+        );
+      case 'user-disabled':
+        return const LogInWithGoogleFailure(
+          message:
+              'This user has been disabled. Please contact support for help.',
+        );
+      case 'user-not-found':
+      case 'wrong-password':
+        return const LogInWithGoogleFailure(
+          message: 'Incorrect password, please try again.',
+        );
+      case 'invalid-verification-code':
+        return const LogInWithGoogleFailure(
+          message: 'The credential verification code received is invalid.',
+        );
+      case 'invalid-verification-id':
+        return const LogInWithGoogleFailure(
+          message: 'The credential verification ID received is invalid.',
+        );
+      default:
+        return const LogInWithGoogleFailure();
     }
   }
 
