@@ -51,3 +51,5 @@ class ForgotPassword extends LoginEvent {
 }
 
 class GoogleLoginAttempt extends LoginEvent {}
+
+class AppleLoginAttempt extends LoginEvent {}
