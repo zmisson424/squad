@@ -29,3 +29,7 @@ See how to install firebase in Flutter project.
 - Facebook
 - Github
 - Email
+
+### Email and Password Sign Up Requirements
+
+### Forgot Password email template setup / Firebase
