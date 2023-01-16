@@ -15,6 +15,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<ForgotPassword>(_sendPasswordResetEmail);
     on<GoogleLoginAttempt>(_loginWithGoogle);
     on<AppleLoginAttempt>(_loginWithApple);
+    on<FacebookLoginAttempt>(_loginWithFacebook);
+    on<TwitterLoginAttempt>(_loginWithTwitter);
+    on<GithubLoginAttempt>(_loginWithGithub);
+    on<MicrosoftLoginAttempt>(_loginWithMicrosoft);
   }
 
   final AuthRepository _authRepository;
@@ -50,12 +54,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) async {
     try {
       emit(state.copyWith(status: LoginStatus.inProgress));
-      print("Create Account");
-      // await _authRepository.createAccountWithEmail(
-      //   email: event.email,
-      //   password: event.password,
-      //   name: event.name,
-      // );
+      await _authRepository.createAccountWithEmail(
+        email: event.email,
+        password: event.password,
+        name: event.name,
+      );
     } on SignUpWithEmailAndPasswordFailure catch (e) {
       add(LoginFailure(errorMessage: e.message));
     }
@@ -90,6 +93,50 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       await _authRepository.loginWithApple();
     } on LogInWithAppleFailure catch (e) {
+      add(LoginFailure(errorMessage: e.message));
+    }
+  }
+
+  void _loginWithFacebook(
+    FacebookLoginAttempt event,
+    Emitter<LoginState> emit,
+  ) async {
+    try {
+      await _authRepository.loginWithFacebook();
+    } on LogInWithFacebookFailure catch (e) {
+      add(LoginFailure(errorMessage: e.message));
+    }
+  }
+
+  void _loginWithTwitter(
+    TwitterLoginAttempt event,
+    Emitter<LoginState> emit,
+  ) async {
+    try {
+      await _authRepository.loginWithTwitter();
+    } on LogInWithTwitterFailure catch (e) {
+      add(LoginFailure(errorMessage: e.message));
+    }
+  }
+
+  void _loginWithGithub(
+    GithubLoginAttempt event,
+    Emitter<LoginState> emit,
+  ) async {
+    try {
+      await _authRepository.loginWithGithub();
+    } on LogInWithGithubFailure catch (e) {
+      add(LoginFailure(errorMessage: e.message));
+    }
+  }
+
+  void _loginWithMicrosoft(
+    MicrosoftLoginAttempt event,
+    Emitter<LoginState> emit,
+  ) async {
+    try {
+      await _authRepository.loginWithMicrosoft();
+    } on LogInWithMicrosoftFailure catch (e) {
       add(LoginFailure(errorMessage: e.message));
     }
   }

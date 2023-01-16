@@ -72,6 +72,14 @@ plugin. This feature will require a paid Apple Developer account. Follow all of 
 provided with the plugin to configure this app to work with your Apple account. **Note** Make
 sure to enable Google in the Firebase Auth panel.
 
+#### Facebook Login
+
+#### Twitter Login
+
+#### Github Login
+
+#### Microsoft Login
+
 #### Multi Factor Authentication
 
 In development. This is built in with Firebase. **Requires either the Spark or Blaze Plan**

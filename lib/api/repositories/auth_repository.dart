@@ -149,6 +149,50 @@ class AuthRepository {
       throw const LogInWithAppleFailure();
     }
   }
+
+  // Handle Facebook Login Authentication
+  Future<void> loginWithFacebook() async {
+    try {
+      // TODO
+    } on FirebaseAuthException catch (e) {
+      throw LogInWithFacebookFailure.fromCode(e.code);
+    } catch (_) {
+      throw const LogInWithAppleFailure();
+    }
+  }
+
+  // Handle Twitter Login Authentication
+  Future<void> loginWithTwitter() async {
+    try {
+      // TODO
+    } on FirebaseAuthException catch (e) {
+      throw LogInWithTwitterFailure.fromCode(e.code);
+    } catch (_) {
+      throw const LogInWithTwitterFailure();
+    }
+  }
+
+  // Handle Github Login Authentication
+  Future<void> loginWithGithub() async {
+    try {
+      // TODO
+    } on FirebaseAuthException catch (e) {
+      throw LogInWithGithubFailure.fromCode(e.code);
+    } catch (_) {
+      throw const LogInWithGithubFailure();
+    }
+  }
+
+  // Handle Microsoft Login Authentication
+  Future<void> loginWithMicrosoft() async {
+    try {
+      // TODO
+    } on FirebaseAuthException catch (e) {
+      throw LogInWithMicrosoftFailure.fromCode(e.code);
+    } catch (_) {
+      throw const LogInWithMicrosoftFailure();
+    }
+  }
 }
 
 /// Error list for Sign Up with Email and Password
@@ -322,6 +366,182 @@ class LogInWithAppleFailure implements Exception {
         );
       default:
         return const LogInWithAppleFailure();
+    }
+  }
+
+  final String message;
+}
+
+/// Facebook Failures
+/// TODO: L10N
+class LogInWithFacebookFailure implements Exception {
+  const LogInWithFacebookFailure(
+      {this.message = 'An unknown error has occured.'});
+
+  factory LogInWithFacebookFailure.fromCode(String code) {
+    switch (code) {
+      case 'account-exists-with-different-credential':
+        return const LogInWithFacebookFailure(
+            message: 'Account exists with different credentials.');
+      case 'invalid-credential':
+        return const LogInWithFacebookFailure(
+            message: 'The credential received is invalid or expired');
+      case 'operation-not-allowed':
+        return const LogInWithFacebookFailure(
+          message: 'Operation is not allowed.  Please contact support.',
+        );
+      case 'user-disabled':
+        return const LogInWithFacebookFailure(
+          message:
+              'This user has been disabled. Please contact support for help.',
+        );
+      case 'user-not-found':
+      case 'wrong-password':
+        return const LogInWithFacebookFailure(
+          message: 'Incorrect password, please try again.',
+        );
+      case 'invalid-verification-code':
+        return const LogInWithFacebookFailure(
+          message: 'The credential verification code received is invalid.',
+        );
+      case 'invalid-verification-id':
+        return const LogInWithFacebookFailure(
+          message: 'The credential verification ID received is invalid.',
+        );
+      default:
+        return const LogInWithFacebookFailure();
+    }
+  }
+
+  final String message;
+}
+
+/// Twitter Failures
+/// TODO: L10N
+class LogInWithTwitterFailure implements Exception {
+  const LogInWithTwitterFailure(
+      {this.message = 'An unknown error has occured.'});
+
+  factory LogInWithTwitterFailure.fromCode(String code) {
+    switch (code) {
+      case 'account-exists-with-different-credential':
+        return const LogInWithTwitterFailure(
+            message: 'Account exists with different credentials.');
+      case 'invalid-credential':
+        return const LogInWithTwitterFailure(
+            message: 'The credential received is invalid or expired');
+      case 'operation-not-allowed':
+        return const LogInWithTwitterFailure(
+          message: 'Operation is not allowed.  Please contact support.',
+        );
+      case 'user-disabled':
+        return const LogInWithTwitterFailure(
+          message:
+              'This user has been disabled. Please contact support for help.',
+        );
+      case 'user-not-found':
+      case 'wrong-password':
+        return const LogInWithTwitterFailure(
+          message: 'Incorrect password, please try again.',
+        );
+      case 'invalid-verification-code':
+        return const LogInWithTwitterFailure(
+          message: 'The credential verification code received is invalid.',
+        );
+      case 'invalid-verification-id':
+        return const LogInWithTwitterFailure(
+          message: 'The credential verification ID received is invalid.',
+        );
+      default:
+        return const LogInWithTwitterFailure();
+    }
+  }
+
+  final String message;
+}
+
+/// Github Failures
+/// TODO: L10N
+class LogInWithGithubFailure implements Exception {
+  const LogInWithGithubFailure(
+      {this.message = 'An unknown error has occured.'});
+
+  factory LogInWithGithubFailure.fromCode(String code) {
+    switch (code) {
+      case 'account-exists-with-different-credential':
+        return const LogInWithGithubFailure(
+            message: 'Account exists with different credentials.');
+      case 'invalid-credential':
+        return const LogInWithGithubFailure(
+            message: 'The credential received is invalid or expired');
+      case 'operation-not-allowed':
+        return const LogInWithGithubFailure(
+          message: 'Operation is not allowed.  Please contact support.',
+        );
+      case 'user-disabled':
+        return const LogInWithGithubFailure(
+          message:
+              'This user has been disabled. Please contact support for help.',
+        );
+      case 'user-not-found':
+      case 'wrong-password':
+        return const LogInWithGithubFailure(
+          message: 'Incorrect password, please try again.',
+        );
+      case 'invalid-verification-code':
+        return const LogInWithGithubFailure(
+          message: 'The credential verification code received is invalid.',
+        );
+      case 'invalid-verification-id':
+        return const LogInWithGithubFailure(
+          message: 'The credential verification ID received is invalid.',
+        );
+      default:
+        return const LogInWithGithubFailure();
+    }
+  }
+
+  final String message;
+}
+
+/// Microsoft Failures
+/// TODO: L10N
+class LogInWithMicrosoftFailure implements Exception {
+  const LogInWithMicrosoftFailure(
+      {this.message = 'An unknown error has occured.'});
+
+  factory LogInWithMicrosoftFailure.fromCode(String code) {
+    switch (code) {
+      case 'account-exists-with-different-credential':
+        return const LogInWithMicrosoftFailure(
+            message: 'Account exists with different credentials.');
+      case 'invalid-credential':
+        return const LogInWithMicrosoftFailure(
+            message: 'The credential received is invalid or expired');
+      case 'operation-not-allowed':
+        return const LogInWithMicrosoftFailure(
+          message: 'Operation is not allowed.  Please contact support.',
+        );
+      case 'user-disabled':
+        return const LogInWithMicrosoftFailure(
+          message:
+              'This user has been disabled. Please contact support for help.',
+        );
+      case 'user-not-found':
+      case 'wrong-password':
+        return const LogInWithMicrosoftFailure(
+          message: 'Incorrect password, please try again.',
+        );
+      case 'invalid-verification-code':
+        return const LogInWithMicrosoftFailure(
+          message: 'The credential verification code received is invalid.',
+        );
+      case 'invalid-verification-id':
+        return const LogInWithMicrosoftFailure(
+          message: 'The credential verification ID received is invalid.',
+        );
+      default:
+        return const LogInWithMicrosoftFailure();
     }
   }
 
