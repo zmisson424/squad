@@ -12,35 +12,40 @@ class GithubLoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 250,
-      height: 40,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.grey.shade900,
-          shadowColor: Theme.of(context).colorScheme.shadow,
-          elevation: 2,
-        ),
-        child: Row(
-          children: [
-            Image.asset(
-              Images.githubLogo,
-              width: 24,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 26,
+    return Padding(
+      padding: const EdgeInsets.only(
+        bottom: 12,
+      ),
+      child: SizedBox(
+        width: 250,
+        height: 40,
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.grey.shade900,
+            shadowColor: Theme.of(context).colorScheme.shadow,
+            elevation: 2,
+          ),
+          child: Row(
+            children: [
+              Image.asset(
+                Images.githubLogo,
+                width: 24,
               ),
-              child: Text(
-                AppLocalizations.of(context)!.githubSignIn,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 26,
                 ),
-              ),
-            )
-          ],
+                child: Text(
+                  AppLocalizations.of(context)!.githubSignIn,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

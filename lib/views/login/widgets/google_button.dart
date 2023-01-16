@@ -15,37 +15,42 @@ class GoogleLoginButton extends StatelessWidget {
     }
 
     return BlocBuilder<LoginBloc, LoginState>(builder: ((context, state) {
-      return SizedBox(
-        width: 250,
-        height: 40,
-        child: ElevatedButton(
-          onPressed: () {
-            context.read<LoginBloc>().add(GoogleLoginAttempt());
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.white,
-            shadowColor: Theme.of(context).colorScheme.shadow,
-            elevation: 2,
-          ),
-          child: Row(
-            children: [
-              Image.asset(
-                Images.googleLogo,
-                width: 24,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 24,
+      return Padding(
+        padding: const EdgeInsets.only(
+          bottom: 12,
+        ),
+        child: SizedBox(
+          width: 250,
+          height: 40,
+          child: ElevatedButton(
+            onPressed: () {
+              context.read<LoginBloc>().add(GoogleLoginAttempt());
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              shadowColor: Theme.of(context).colorScheme.shadow,
+              elevation: 2,
+            ),
+            child: Row(
+              children: [
+                Image.asset(
+                  Images.googleLogo,
+                  width: 24,
                 ),
-                child: Text(
-                  AppLocalizations.of(context)!.googleSignIn,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.black,
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 24,
                   ),
-                ),
-              )
-            ],
+                  child: Text(
+                    AppLocalizations.of(context)!.googleSignIn,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.black,
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       );

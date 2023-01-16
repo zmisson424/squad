@@ -40,24 +40,12 @@ class LoginForm extends StatelessWidget {
               ),
             ),
             const GoogleLoginButton(),
-            const Padding(
-              padding: EdgeInsets.only(
-                top: 12,
-                bottom: 12,
-              ),
-              child: AppleLoginButton(),
-            ),
+            const AppleLoginButton(),
             FacebookLoginButton(
               onPressed: () => print("TODO"),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 12,
-                bottom: 12,
-              ),
-              child: GithubLoginButton(
-                onPressed: () => print("TODO"),
-              ),
+            GithubLoginButton(
+              onPressed: () => print("TODO"),
             ),
             EmailLoginButton(
               onPressed: () => _onEmailButtonClicked(context),
