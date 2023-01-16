@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:squad/views/login/bloc/login_bloc.dart';
 import 'package:squad/views/login/widgets/apple_button.dart';
 import 'package:squad/views/login/widgets/email_button.dart';
-import 'package:squad/views/login/widgets/email_dialog.dart';
 import 'package:squad/views/login/widgets/facebook_button.dart';
 import 'package:squad/views/login/widgets/github_button.dart';
 import 'package:squad/views/login/widgets/google_button.dart';
@@ -41,30 +38,12 @@ class LoginForm extends StatelessWidget {
             ),
             const GoogleLoginButton(),
             const AppleLoginButton(),
-            FacebookLoginButton(
-              onPressed: () => print("TODO"),
-            ),
-            GithubLoginButton(
-              onPressed: () => print("TODO"),
-            ),
-            EmailLoginButton(
-              onPressed: () => _onEmailButtonClicked(context),
-            ),
+            const FacebookLoginButton(),
+            const GithubLoginButton(),
+            const EmailLoginButton(),
           ],
         ),
       ),
-    );
-  }
-
-  void _onEmailButtonClicked(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (ctx) {
-        return BlocProvider.value(
-          value: BlocProvider.of<LoginBloc>(context),
-          child: const EmailDialog(),
-        );
-      },
     );
   }
 }

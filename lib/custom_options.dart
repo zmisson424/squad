@@ -11,16 +11,22 @@ class CustomOptions {
   static bool allowGoogleSignIn = true;
 
   // Apple Login Enabled
-  static bool allowAppleSignIn = false;
+  static bool allowAppleSignIn = true;
 
   // Facebook Login Enabled
-  static bool allowFacebookSignIn = false;
+  static bool allowFacebookSignIn = true;
+
+  // Twitter Login Enabled
+  static bool allowTwitterSignIn = true;
 
   // Github Login Enabled
-  static bool allowGithubSignIn = false;
+  static bool allowGithubSignIn = true;
+
+  // Microsoft Login Enabled
+  static bool allowMicrosoftSignIn = true;
 
   // Email and Password Login Enabled
-  static bool allowEmailSignIn = false;
+  static bool allowEmailSignIn = true;
 
   /// The minimum length a password must be
   /// NOTE: The minimum accepted length is

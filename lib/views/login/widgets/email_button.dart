@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:squad/views/login/bloc/login_bloc.dart';
+import 'package:squad/views/login/widgets/email_dialog.dart';
 
 class EmailLoginButton extends StatelessWidget {
-  const EmailLoginButton({
-    Key? key,
-    required this.onPressed,
-  }) : super(key: key);
-
-  final Function() onPressed;
+  const EmailLoginButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +13,7 @@ class EmailLoginButton extends StatelessWidget {
       width: 250,
       height: 40,
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: () => _onEmailButtonClicked(context),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.red.shade700,
           shadowColor: Theme.of(context).colorScheme.shadow,
@@ -43,6 +41,18 @@ class EmailLoginButton extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _onEmailButtonClicked(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) {
+        return BlocProvider.value(
+          value: BlocProvider.of<LoginBloc>(context),
+          child: const EmailDialog(),
+        );
+      },
     );
   }
 }
