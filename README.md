@@ -58,6 +58,9 @@ Google Authentication requires the offical [plugin](https://pub.dev/packages/goo
 by the flutter team. Follow the documentation to register your application with Google. **Note** Make
 sure to enable Google in the Firebase Auth panel.
 
+To enable on Web make sure to provide your GOOGLE_SIGN_IN_OAUTH_CLIENT_ID in the <meta> tag in
+web/index.html
+
 #### Multi Factor Authentication
 
 In development. This is built in with Firebase. **Requires either the Spark or Blaze Plan**
