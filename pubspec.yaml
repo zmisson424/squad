@@ -19,11 +19,15 @@ dependencies:
 
   cupertino_icons: ^1.0.2
 
-  flutter_bloc: ^8.1.1
+  flutter_bloc: ^8.1.1 # state management
 
-  equatable: ^2.0.5
+  equatable: ^2.0.5 # state management runs with bloc
+
   firebase_core: ^2.4.1
+
   firebase_auth: ^4.2.5
+
+  google_sign_in: ^5.4.3 # handle Google Authentication
 
 dev_dependencies:
   flutter_test:
