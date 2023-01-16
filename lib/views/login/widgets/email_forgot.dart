@@ -1,13 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:squad/utils/validators.dart';
+import 'package:squad/views/login/bloc/login_bloc.dart';
 
-class EmailForgot extends StatelessWidget {
+class EmailForgot extends StatefulWidget {
   const EmailForgot({
     Key? key,
     required this.onBack,
   }) : super(key: key);
 
   final Function() onBack;
+
+  @override
+  State<EmailForgot> createState() => _EmailForgotState();
+}
+
+class _EmailForgotState extends State<EmailForgot> {
+  final TextEditingController _emailController = TextEditingController();
+
+  String? _emailError;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +38,7 @@ class EmailForgot extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                onPressed: onBack,
+                onPressed: widget.onBack,
                 icon: const Icon(
                   Icons.arrow_back_ios,
                 ),
@@ -45,17 +63,25 @@ class EmailForgot extends StatelessWidget {
             ),
             child: SizedBox(
               width: 300,
-              height: 48,
               child: TextField(
+                keyboardType: TextInputType.emailAddress,
+                controller: _emailController,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  labelText: AppLocalizations.of(context)!.email,
-                  prefixIcon: const Icon(
-                    Icons.email_outlined,
-                  ),
-                ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    labelText: AppLocalizations.of(context)!.email,
+                    prefixIcon: const Icon(
+                      Icons.email_outlined,
+                    ),
+                    errorText: _emailError),
+                onChanged: (_) {
+                  if (_emailError != null) {
+                    setState(() {
+                      _emailError = null;
+                    });
+                  }
+                },
               ),
             ),
           ),
@@ -71,10 +97,7 @@ class EmailForgot extends StatelessWidget {
                   backgroundColor: Colors.deepOrange.shade500,
                   foregroundColor: Colors.white,
                 ),
-                onPressed: () {
-                  // TODO
-                  Navigator.of(context).pop();
-                },
+                onPressed: () => _handleForgotEmail(context),
                 child: Text(
                   AppLocalizations.of(context)!.sendResetEmail,
                 ),
@@ -84,5 +107,19 @@ class EmailForgot extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _handleForgotEmail(BuildContext context) {
+    // Check Email
+    if (isValidEmailAddress(_emailController.text)) {
+      context
+          .read<LoginBloc>()
+          .add(ForgotPassword(email: _emailController.text));
+      Navigator.of(context).pop();
+    } else {
+      setState(() {
+        _emailError = AppLocalizations.of(context)!.invalidEmailError;
+      });
+    }
   }
 }

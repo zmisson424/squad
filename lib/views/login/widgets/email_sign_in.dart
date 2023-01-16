@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:squad/views/login/bloc/login_bloc.dart';
 
-class EmailSignIn extends StatelessWidget {
+class EmailSignIn extends StatefulWidget {
   const EmailSignIn({
     Key? key,
     required this.onCreate,
@@ -11,6 +13,29 @@ class EmailSignIn extends StatelessWidget {
   final Function() onCreate;
 
   final Function() onForgot;
+
+  @override
+  State<EmailSignIn> createState() => _EmailSignInState();
+}
+
+class _EmailSignInState extends State<EmailSignIn> {
+  late final TextEditingController _emailController;
+
+  late final TextEditingController _passwordController;
+
+  @override
+  void initState() {
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +58,8 @@ class EmailSignIn extends StatelessWidget {
               width: 300,
               height: 48,
               child: TextField(
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -52,6 +79,7 @@ class EmailSignIn extends StatelessWidget {
               height: 48,
               child: TextField(
                 obscureText: true,
+                textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -69,18 +97,27 @@ class EmailSignIn extends StatelessWidget {
             child: SizedBox(
               width: 300,
               height: 48,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepOrange.shade500,
-                  foregroundColor: Colors.white,
-                ),
-                onPressed: () {
-                  // TODO
-                  Navigator.of(context).pop();
+              child: BlocBuilder<LoginBloc, LoginState>(
+                builder: (context, state) {
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepOrange.shade500,
+                      foregroundColor: Colors.white,
+                    ),
+                    onPressed: () {
+                      context.read<LoginBloc>().add(
+                            EmailLoginAttempt(
+                              email: _emailController.text,
+                              password: _passwordController.text,
+                            ),
+                          );
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.signIn,
+                    ),
+                  );
                 },
-                child: Text(
-                  AppLocalizations.of(context)!.signIn,
-                ),
               ),
             ),
           ),
@@ -90,14 +127,14 @@ class EmailSignIn extends StatelessWidget {
               bottom: 18,
             ),
             child: TextButton(
-              onPressed: onCreate,
+              onPressed: widget.onCreate,
               child: Text(
                 AppLocalizations.of(context)!.createAccount,
               ),
             ),
           ),
           TextButton(
-            onPressed: onForgot,
+            onPressed: widget.onForgot,
             child: Text(
               AppLocalizations.of(context)!.forgotPassword,
             ),
