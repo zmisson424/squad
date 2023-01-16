@@ -21,5 +21,10 @@
     "password": "Password",
     "name": "Name",
     "create": "Create",
-    "sendResetEmail": "Send Password Reset Email"
+    "sendResetEmail": "Send Password Reset Email",
+    "invalidEmailError": "Must enter a valid email address.",
+    "invalidNameError": "Must enter a valid name.",
+    "invalidPasswordLengthError": "Password does not meet the minimum lenth requirement.",
+    "invalidPasswordUppercaseError": "Password must contain at least one uppercase character.",
+    "invalidPasswordSpecialError": "Password must contain at least one special character."
 }

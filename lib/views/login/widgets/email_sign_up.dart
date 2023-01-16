@@ -185,45 +185,42 @@ class _EmailSignUpState extends State<EmailSignUp> {
     // Check Name
     if (_nameController.text.isEmpty) {
       validName = false;
-      // TODO: L10N
       setState(() {
-        _nameError = 'Must enter a valid name.';
+        _nameError = AppLocalizations.of(context)!.invalidNameError;
       });
     }
 
     if (!isValidEmailAddress(_emailController.text)) {
       validEmail = false;
-      // TODO: L10N
       setState(() {
-        _emailError = 'Must eneter a valid email address.';
+        _emailError = AppLocalizations.of(context)!.invalidEmailError;
       });
     }
 
+    // TODO Customization requirments
     if (!isPasswordValidLenth(_passwordController.text)) {
       validPassword = false;
-      // TODO: Fix reqs
       setState(() {
-        _passwordError = 'Password must be at least X characters long.';
+        _passwordError =
+            AppLocalizations.of(context)!.invalidPasswordLengthError;
       });
     }
 
     if (!isPasswordValidUppercaseCharacter(_passwordController.text) &&
         validPassword) {
       validPassword = false;
-      // TODO: Fix reqs
       setState(() {
         _passwordError =
-            'Password must contain at least one uppercase character.';
+            AppLocalizations.of(context)!.invalidPasswordUppercaseError;
       });
     }
 
     if (!isPasswordValidSpecialCharacter(_passwordController.text) &&
         validPassword) {
       validPassword = false;
-      // TODO: Fix reqs
       setState(() {
         _passwordError =
-            'Password must contain at least one special character.';
+            AppLocalizations.of(context)!.invalidPasswordSpecialError;
       });
     }
 
