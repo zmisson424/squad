@@ -14,6 +14,8 @@
   "facebookSignIn": "Sign in with Facebook",
   "appleSignIn": "Sign in with Apple",
   "githubSignIn": "Sign in with Github",
+  "twitterSignIn": "Sign in with Twitter",
+  "microsoftSignIn": "Sign in with Microsoft",
   "emailSignIn": "Sign in with Email",
   "createAccount": "Create a new account",
   "forgotPassword": "Forgot Password",

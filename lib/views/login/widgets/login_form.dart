@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:squad/views/login/bloc/login_bloc.dart';
 import 'package:squad/views/login/widgets/apple_button.dart';
 import 'package:squad/views/login/widgets/email_button.dart';
 import 'package:squad/views/login/widgets/facebook_button.dart';
 import 'package:squad/views/login/widgets/github_button.dart';
 import 'package:squad/views/login/widgets/google_button.dart';
 import 'package:squad/views/login/widgets/login_error.dart';
+import 'package:squad/views/login/widgets/microsoft_button.dart';
+import 'package:squad/views/login/widgets/twitter_button.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -39,7 +42,9 @@ class LoginForm extends StatelessWidget {
             const GoogleLoginButton(),
             const AppleLoginButton(),
             const FacebookLoginButton(),
+            const TwitterLoginButton(),
             const GithubLoginButton(),
+            const MicrosoftLoginButton(),
             const EmailLoginButton(),
           ],
         ),
