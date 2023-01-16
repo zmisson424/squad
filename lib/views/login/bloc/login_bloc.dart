@@ -13,6 +13,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<EmailLoginAttempt>(_emailLoginAttempt);
     on<CreateAccountWithEmail>(_createAccountWithEmail);
     on<ForgotPassword>(_sendPasswordResetEmail);
+    on<GoogleLoginAttempt>(_loginWithGoogle);
   }
 
   final AuthRepository _authRepository;
@@ -66,6 +67,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       await _authRepository.requestPasswordReset(email: event.email);
     } on ResetPasswordResetFailure catch (e) {
+      add(LoginFailure(errorMessage: e.message));
+    }
+  }
+
+  void _loginWithGoogle(
+    GoogleLoginAttempt event,
+    Emitter<LoginState> emit,
+  ) async {
+    try {
+      await _authRepository.loginWithGoogle();
+    } on LogInWithGoogleFailure catch (e) {
       add(LoginFailure(errorMessage: e.message));
     }
   }

@@ -39,9 +39,7 @@ class LoginForm extends StatelessWidget {
                 ),
               ),
             ),
-            GoogleLoginButton(
-              onPressed: () => print('TODO'),
-            ),
+            const GoogleLoginButton(),
             Padding(
               padding: const EdgeInsets.only(
                 top: 12,

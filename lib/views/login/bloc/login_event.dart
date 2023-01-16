@@ -49,3 +49,5 @@ class ForgotPassword extends LoginEvent {
   @override
   List<Object> get props => [email];
 }
+
+class GoogleLoginAttempt extends LoginEvent {}
