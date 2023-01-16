@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:squad/custom_options.dart';
 import 'package:squad/utils/validators.dart';
 import 'package:squad/views/login/bloc/login_bloc.dart';
 import 'package:squad/views/login/widgets/password_req.dart';
@@ -168,18 +169,22 @@ class _EmailSignUpState extends State<EmailSignUp> {
           PasswordRequirement(
             isValid: _passwordLengthValidity,
             text:
-                "${AppLocalizations.of(context)!.passwordRequirementMustContain}5${AppLocalizations.of(context)!.passwordRequirementLength}",
+                "${AppLocalizations.of(context)!.passwordRequirementMustContain}${CustomOptions.passwordRequirementLength.toString()}${AppLocalizations.of(context)!.passwordRequirementLength}",
           ),
-          PasswordRequirement(
-            isValid: _passwordUppercaseValidity,
-            text:
-                "${AppLocalizations.of(context)!.passwordRequirementMustContain}${AppLocalizations.of(context)!.passwordRequirementUppercase}",
-          ),
-          PasswordRequirement(
-            isValid: _passwordSpecialCharacterValidity,
-            text:
-                "${AppLocalizations.of(context)!.passwordRequirementMustContain}${AppLocalizations.of(context)!.passwordRequirementSpecial}",
-          ),
+          CustomOptions.passwordRequirementUppercaseLetter
+              ? PasswordRequirement(
+                  isValid: _passwordUppercaseValidity,
+                  text:
+                      "${AppLocalizations.of(context)!.passwordRequirementMustContain}${AppLocalizations.of(context)!.passwordRequirementUppercase}",
+                )
+              : Container(),
+          CustomOptions.passwordRequirementSpecialCharacter
+              ? PasswordRequirement(
+                  isValid: _passwordSpecialCharacterValidity,
+                  text:
+                      "${AppLocalizations.of(context)!.passwordRequirementMustContain}${AppLocalizations.of(context)!.passwordRequirementSpecial}",
+                )
+              : Container(),
           Padding(
             padding: const EdgeInsets.only(
               top: 12,
@@ -243,16 +248,26 @@ class _EmailSignUpState extends State<EmailSignUp> {
         _passwordError =
             AppLocalizations.of(context)!.invalidPasswordLengthError;
       });
-    } else if (!_passwordUppercaseValidity) {
+    } else if (!_passwordUppercaseValidity &&
+        CustomOptions.passwordRequirementUppercaseLetter) {
       setState(() {
         _passwordError =
             AppLocalizations.of(context)!.invalidPasswordUppercaseError;
       });
-    } else if (!_passwordSpecialCharacterValidity) {
+    } else if (!_passwordSpecialCharacterValidity &&
+        CustomOptions.passwordRequirementSpecialCharacter) {
       setState(() {
         _passwordError =
             AppLocalizations.of(context)!.invalidPasswordSpecialError;
       });
+    }
+
+    if (!CustomOptions.passwordRequirementUppercaseLetter) {
+      _passwordUppercaseValidity = true;
+    }
+
+    if (!CustomOptions.passwordRequirementSpecialCharacter) {
+      _passwordSpecialCharacterValidity = true;
     }
 
     if (validEmail &&

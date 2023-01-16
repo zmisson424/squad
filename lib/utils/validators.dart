@@ -1,3 +1,5 @@
+import 'package:squad/custom_options.dart';
+
 bool isValidEmailAddress(String email) {
   final RegExp emailRegExp = RegExp(
     r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',
@@ -7,8 +9,11 @@ bool isValidEmailAddress(String email) {
 }
 
 bool isPasswordValidLenth(String password) {
-  // TODO: Implement customization
-  return password.length >= 5;
+  int minimumRequirement = CustomOptions.passwordRequirementLength;
+  if (minimumRequirement < 6) {
+    minimumRequirement = 6;
+  }
+  return password.length >= minimumRequirement;
 }
 
 bool isPasswordValidSpecialCharacter(String password) {
