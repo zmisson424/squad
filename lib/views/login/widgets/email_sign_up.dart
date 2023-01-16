@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:squad/utils/validators.dart';
 import 'package:squad/views/login/bloc/login_bloc.dart';
+import 'package:squad/views/login/widgets/password_req.dart';
 
 class EmailSignUp extends StatefulWidget {
   const EmailSignUp({
@@ -24,6 +25,16 @@ class _EmailSignUpState extends State<EmailSignUp> {
   String? _emailError;
   String? _passwordError;
   String? _nameError;
+
+  bool _passwordLengthValidity = false;
+  bool _passwordUppercaseValidity = false;
+  bool _passwordSpecialCharacterValidity = false;
+
+  @override
+  void initState() {
+    _passwordController.addListener(_passwordListener);
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -125,6 +136,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
           Padding(
             padding: const EdgeInsets.only(
               top: 12,
+              bottom: 8,
             ),
             child: SizedBox(
               width: 300,
@@ -153,6 +165,21 @@ class _EmailSignUpState extends State<EmailSignUp> {
               ),
             ),
           ),
+          PasswordRequirement(
+            isValid: _passwordLengthValidity,
+            text:
+                "${AppLocalizations.of(context)!.passwordRequirementMustContain}5${AppLocalizations.of(context)!.passwordRequirementLength}",
+          ),
+          PasswordRequirement(
+            isValid: _passwordUppercaseValidity,
+            text:
+                "${AppLocalizations.of(context)!.passwordRequirementMustContain}${AppLocalizations.of(context)!.passwordRequirementUppercase}",
+          ),
+          PasswordRequirement(
+            isValid: _passwordSpecialCharacterValidity,
+            text:
+                "${AppLocalizations.of(context)!.passwordRequirementMustContain}${AppLocalizations.of(context)!.passwordRequirementSpecial}",
+          ),
           Padding(
             padding: const EdgeInsets.only(
               top: 12,
@@ -177,10 +204,22 @@ class _EmailSignUpState extends State<EmailSignUp> {
     );
   }
 
+  void _passwordListener() {
+    bool length = isPasswordValidLenth(_passwordController.text);
+    bool uppercase =
+        isPasswordValidUppercaseCharacter(_passwordController.text);
+    bool special = isPasswordValidSpecialCharacter(_passwordController.text);
+
+    setState(() {
+      _passwordLengthValidity = length;
+      _passwordSpecialCharacterValidity = special;
+      _passwordUppercaseValidity = uppercase;
+    });
+  }
+
   void _handleCreateAccount(BuildContext context) {
     bool validEmail = true;
     bool validName = true;
-    bool validPassword = true;
 
     // Check Name
     if (_nameController.text.isEmpty) {
@@ -190,6 +229,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
       });
     }
 
+    // Check Email
     if (!isValidEmailAddress(_emailController.text)) {
       validEmail = false;
       setState(() {
@@ -197,34 +237,29 @@ class _EmailSignUpState extends State<EmailSignUp> {
       });
     }
 
-    // TODO Customization requirments
-    if (!isPasswordValidLenth(_passwordController.text)) {
-      validPassword = false;
+    // Check Password
+    if (!_passwordLengthValidity) {
       setState(() {
         _passwordError =
             AppLocalizations.of(context)!.invalidPasswordLengthError;
       });
-    }
-
-    if (!isPasswordValidUppercaseCharacter(_passwordController.text) &&
-        validPassword) {
-      validPassword = false;
+    } else if (!_passwordUppercaseValidity) {
       setState(() {
         _passwordError =
             AppLocalizations.of(context)!.invalidPasswordUppercaseError;
       });
-    }
-
-    if (!isPasswordValidSpecialCharacter(_passwordController.text) &&
-        validPassword) {
-      validPassword = false;
+    } else if (!_passwordSpecialCharacterValidity) {
       setState(() {
         _passwordError =
             AppLocalizations.of(context)!.invalidPasswordSpecialError;
       });
     }
 
-    if (validEmail && validName && validPassword) {
+    if (validEmail &&
+        validName &&
+        _passwordLengthValidity &&
+        _passwordUppercaseValidity &&
+        _passwordSpecialCharacterValidity) {
       context.read<LoginBloc>().add(
             CreateAccountWithEmail(
                 email: _emailController.text,

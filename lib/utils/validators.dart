@@ -8,15 +8,20 @@ bool isValidEmailAddress(String email) {
 
 bool isPasswordValidLenth(String password) {
   // TODO: Implement customization
-  return password.length > 5;
+  return password.length >= 5;
 }
 
 bool isPasswordValidSpecialCharacter(String password) {
-  // TODO
-  return true;
+  final RegExp specialCharacterRegExp = RegExp(
+    r'[!@#$%^&*(),.?":{}|<>]',
+  );
+  return specialCharacterRegExp.hasMatch(password);
 }
 
 bool isPasswordValidUppercaseCharacter(String password) {
-  // TODO
-  return true;
+  final RegExp uppercaseRegExp = RegExp(
+    r'[A-Z]',
+  );
+  return uppercaseRegExp.hasMatch(password);
+  ;
 }
