@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:squad/models/user.dart' as squad_user;
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -153,11 +154,17 @@ class AuthRepository {
   // Handle Facebook Login Authentication
   Future<void> loginWithFacebook() async {
     try {
-      // TODO
+      final LoginResult result = await FacebookAuth.instance.login();
+      if (result.status != LoginStatus.success) {
+        throw 'Login Failed';
+      }
+      AuthCredential credential =
+          FacebookAuthProvider.credential(result.accessToken!.token);
+      await _firebaseAuth.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       throw LogInWithFacebookFailure.fromCode(e.code);
     } catch (_) {
-      throw const LogInWithAppleFailure();
+      throw const LogInWithFacebookFailure();
     }
   }
 

@@ -78,6 +78,10 @@ Facebook Authentication will utilize [flutter_facebook_auth](https://pub.dev/pac
 plugin. Follow all of the instructions to receive Facebook Developer keys. **Note** Make
 sure to enable Google in the Firebase Auth panel.
 
+// TODO Document setup for web, android and iOS
+
+You will need to add the Facebook App ID and Facebook SDK Version number in the `config.dart` file
+
 #### Twitter Login
 
 #### Github Login
